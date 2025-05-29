@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/catch-monkey-app/static/css/main.9f50954c.css",
-    "main.js": "/catch-monkey-app/static/js/main.54e28017.js",
+    "main.js": "/catch-monkey-app/static/js/main.0e03add9.js",
     "static/js/453.cc668c4b.chunk.js": "/catch-monkey-app/static/js/453.cc668c4b.chunk.js",
     "index.html": "/catch-monkey-app/index.html",
     "main.9f50954c.css.map": "/catch-monkey-app/static/css/main.9f50954c.css.map",
-    "main.54e28017.js.map": "/catch-monkey-app/static/js/main.54e28017.js.map",
+    "main.0e03add9.js.map": "/catch-monkey-app/static/js/main.0e03add9.js.map",
     "453.cc668c4b.chunk.js.map": "/catch-monkey-app/static/js/453.cc668c4b.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.9f50954c.css",
-    "static/js/main.54e28017.js"
+    "static/js/main.0e03add9.js"
   ]
 }
