@@ -1,7 +1,7 @@
 {
-  "name": "encdec",
+  "name": "catch-monkey-app",
   "version": "0.1.0",
-  "homepage": "https://saketbrijsinha.github.io/catch-monkey-and-app",
+  "homepage": "https://saketbrijsinha.github.io/catch-monkey-app",
   "private": true,
   "dependencies": {
     "@testing-library/dom": "^10.4.0",

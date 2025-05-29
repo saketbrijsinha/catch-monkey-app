@@ -80,10 +80,10 @@ const App = () => {
   return (
     <div className="container mt-5">
       <div className="card shadow-lg p-4 rounded">
-        <h2 className="text-center mb-4">Decryption</h2>
+        <h2 className="text-center mb-4">Catch Monkey</h2>
         <div className="form-group mb-3">
           <label htmlFor="inputField" className="form-label">
-            Enter encrypted string (without quotes):
+            Enter Monkey string (without quotes):
           </label>
           <input
             type="text"
@@ -99,17 +99,17 @@ const App = () => {
             className="btn btn-primary btn-lg"
             onClick={handleButtonClick}
           >
-            Show Output
+            Convert to App
           </button>
         </div>
         {outputJson ? (
           <>
             <div className="output-box mt-4">
-              <h4 className="output-label">Output JSON:</h4>
+              <h4 className="output-label">Output App JSON:</h4>
               <pre className="output-value">{renderJson(outputJson)}</pre>
             </div>
             <div className="output-box mt-4">
-              <h4 className="output-label">Output Stringified JSON:</h4>
+              <h4 className="output-label">Output Stringified App JSON:</h4>
               <pre className="output-value">
                 {JSON.stringify(outputJson, null, 2)}
               </pre>
@@ -120,7 +120,7 @@ const App = () => {
           </>
         ) : outputValue ? (
           <div className="output-box mt-4 text-center">
-            <h4 className="output-label">Decrypted value:</h4>
+            <h4 className="output-label">App value:</h4>
             <p className="output-value">{outputValue}</p>
           </div>
         ) : (
