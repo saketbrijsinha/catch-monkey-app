@@ -1,0 +1,105 @@
+/* Centering the card and setting up the background */
+body {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #74ebd5, #acb6e5);
+  margin: 0;
+  font-family: "Roboto", sans-serif;
+}
+
+/* Styling the card with a beautiful border and shadow */
+.card {
+  width: 90vw;
+  background: #fff;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.1);
+  max-width: 1300px;
+  /* width: 100%; */
+}
+
+/* Styling the title */
+h2 {
+  font-weight: 700;
+  color: #444;
+}
+
+/* Customizing the input field */
+.form-control {
+  padding: 12px 20px;
+  border-radius: 10px;
+  border: 2px solid #007bff;
+  transition: border-color 0.3s ease;
+}
+
+.form-control:focus {
+  border-color: #0056b3;
+  box-shadow: 0px 0px 10px rgba(0, 123, 255, 0.5);
+  outline: none;
+}
+
+/* Customizing the button */
+.btn-primary {
+  background-color: #007bff;
+  border-color: #007bff;
+  font-weight: bold;
+  padding: 12px 30px;
+  border-radius: 30px;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+  box-shadow: 0px 5px 15px rgba(0, 123, 255, 0.5);
+}
+
+/* Output box with a soft background */
+.output-box {
+  background-color: #f0f8ff;
+  padding: 20px;
+  border-radius: 15px;
+  border: 2px solid #007bff;
+  margin-top: 20px;
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Output label and value */
+.output-label {
+  color: #007bff;
+  font-weight: bold;
+}
+
+.output-value {
+  font-size: 1.5rem;
+  color: #333;
+  margin-top: 10px;
+}
+
+/* Smooth transition for elements */
+* {
+  transition: all 0.3s ease-in-out;
+}
+
+.download-button {
+  position: fixed;
+  bottom: 80px;
+  right: 80px;
+  width: 80px;
+  height: 80px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.download-button:hover {
+  background-color: #218838;
+}
