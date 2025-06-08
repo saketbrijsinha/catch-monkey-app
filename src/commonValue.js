@@ -89,37 +89,83 @@ export const convertFileToBase64 = async (selectedFile) => {
   }
 };
 
+/**
+ * Performs AES-256 encryption or decryption on a given value.
+ * The encryption process involves stringifying the input, encrypting it with AES-256,
+ * and then Base64 encoding the encrypted result.
+ * The decryption process involves Base64 decoding the input, decrypting it,
+ * and then attempting to parse the result as JSON if `isParsed` is true.
+ *
+ * Relies on the `REACT_APP_MON_KEY` environment variable for the encryption/decryption key.
+ * Ensure this environment variable is set.
+ *
+ * @param {any} value The value to encrypt or decrypt. For encryption, it will be stringified.
+ * @param {string} [purpose="enc"] Determines the operation: "enc" for encryption, "dec" for decryption.
+ * @param {boolean} [isParsed=true] For decryption, if true, attempts to JSON.parse the decrypted string.
+ *                                   If false, or if parsing fails, returns the raw decrypted string.
+ *                                   Note: If decryption itself fails, an error string might be returned from crypto-js.
+ * @returns {any} The encrypted string (Base64 encoded), the decrypted JSON object,
+ *                or the decrypted string (if not parsed or parsing failed), or an error string.
+ */
 export const a256 = (value, purpose = "enc", isParsed = true) => {
+  const secretKey = process.env.REACT_APP_MON_KEY;
+  if (!secretKey) {
+    console.error("Encryption key (REACT_APP_MON_KEY) is not set.");
+    return "Error: Encryption key missing.";
+  }
+
   if (purpose === "enc") {
-    const monkeyStr = JSON.stringify(value);
-    const monkenc = Crypto.AES.encrypt(
-      monkeyStr || "",
-      process.env.REACT_APP_MON_KEY
-    ).toString();
-
-    const monkeyb64 = b64(monkenc);
-
-    return monkeyb64;
+    try {
+      // Ensure the value is stringified before encryption, as AES works on strings.
+      const stringToEncrypt = typeof value === 'string' ? value : JSON.stringify(value);
+      const encrypted = Crypto.AES.encrypt(
+        stringToEncrypt,
+        secretKey
+      ).toString();
+      // Base64 encode the encrypted string for easier handling/storage.
+      return b64(encrypted, "enc"); // b64 handles utf8 encoding before base64
+    } catch (error) {
+      console.error("Encryption failed:", error);
+      return "Error: Encryption process failed.";
+    }
   }
 
   if (purpose === "dec") {
-    const monkeydec = b64(value, "dec");
+    try {
+      // Base64 decode the input value first.
+      const base64Decoded = b64(value, "dec");
+      if (!base64Decoded) { // Check if b64 decoding failed (e.g. invalid base64 string)
+          return "Error: Invalid input string for decryption (Base64 decode failed).";
+      }
 
-    if (isParsed) {
-      const monkeyorg = JSON.parse(
-        Crypto.AES.decrypt(monkeydec, process.env.REACT_APP_MON_KEY).toString(
-          Crypto.enc.Utf8
-        )
-      );
+      // Decrypt the Base64 decoded string.
+      const decryptedBytes = Crypto.AES.decrypt(base64Decoded, secretKey);
+      const decryptedString = decryptedBytes.toString(Crypto.enc.Utf8);
 
-      return monkeyorg;
-    } else {
-      const monkeyorg = Crypto.AES.decrypt(
-        monkeydec,
-        process.env.REACT_APP_MON_KEY
-      ).toString(Crypto.enc.Utf8);
+      if (!decryptedString) {
+        // This can happen if the key is wrong or the message is corrupted,
+        // leading to an empty string after decryption attempt.
+        return "Error: Decryption failed (empty result - check key or input validity).";
+      }
 
-      return monkeyorg;
+      if (isParsed) {
+        try {
+          // Attempt to parse the decrypted string as JSON.
+          const parsedJson = JSON.parse(decryptedString);
+          return parsedJson;
+        } catch (parseError) {
+          // If JSON parsing fails, return the raw decrypted string.
+          // This means the original data was not a JSON string.
+          return decryptedString;
+        }
+      } else {
+        // If isParsed is false, return the raw decrypted string.
+        return decryptedString;
+      }
+    } catch (error) {
+      console.error("Decryption failed:", error);
+      // General error during decryption process (e.g., malformed cryptoJS object from b64)
+      return "Error: Decryption process failed.";
     }
   }
 };

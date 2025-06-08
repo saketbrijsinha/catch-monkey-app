@@ -1,0 +1,58 @@
+.calculator {
+  width: 300px; /* Or your preferred width */
+  margin: 20px auto;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  /* padding: 10px; from card */
+  /* box-shadow: 0 2px 5px rgba(0,0,0,0.1); from card */
+}
+
+.calculator-display {
+  background-color: #f8f9fa;
+  /* border: 1px solid #ced4da; from form-control */
+  border-radius: .25rem;
+  padding: 10px;
+  font-size: 1.8em; /* Made slightly smaller to prevent overflow with default width */
+  /* text-align: right; from bootstrap class */
+  margin-bottom: 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-height: 60px; /* Ensure a minimum height */
+}
+
+.calculator-keys .row .col-3 button,
+.calculator-keys .row .col-4 button, /* Adjusted for new 4-column layout within number block */
+.calculator-keys .row .col-6 button,
+.calculator-keys .row .col-8 button, /* Adjusted for new 0 button */
+.calculator-keys .col-3 button, /* For operator column buttons */
+.calculator-keys .col-9 .row .col-4 button { /* Specific targeting for number buttons */
+  font-size: 1.2em;
+  /* padding: 15px; from btn - Bootstrap default is fine */
+}
+
+.calculator-keys .btn-secondary.h-100,
+.calculator-keys .btn-primary.h-100 {
+  /* Using h-100 Bootstrap class for full height, no need for complex calc */
+}
+
+/* Ensure the row containing the spanning button has its items aligned correctly if needed */
+.calculator-keys .row {
+  align-items: stretch; /* Default, but good to be aware */
+}
+
+/* Optional: Add some visual distinction for operator buttons if desired, beyond btn-secondary */
+.calculator-keys .btn-secondary {
+  /* background-color: #6c757d; Already done by Bootstrap */
+  /* color: white; Already done by Bootstrap */
+}
+/* Optional: Add some visual distinction for the C button if desired, beyond btn-danger */
+.calculator-keys .btn-danger {
+ /* background-color: #dc3545; Already done by Bootstrap */
+ /* color: white; Already done by Bootstrap */
+}
+
+/* Optional: Add hover effects for better UX */
+.calculator-keys button:hover {
+  opacity: 0.8;
+}
